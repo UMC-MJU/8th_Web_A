@@ -3,6 +3,7 @@ import { useState } from 'react';
 import InputForm from './components/InputForm';
 import TodoList from './components/TodoList';
 import DoneList from './components/DoneList';
+import { TodoContext } from './context/TodoContext';
 
 export type Task = {
   id: number;
@@ -40,18 +41,26 @@ function App() {
   };
 
   return (
-    <div className="todo-container">
-      <h1 className="todo-container__header">DONGI TODO</h1>
-      <InputForm
-        inputValue={inputValue}
-        onChange={handleInputChange}
-        onSubmit={handleSubmit}
-      />
-      <div className="render-container">
-        <TodoList todos={todos} onComplete={completeTask} />
-        <DoneList doneTasks={doneTasks} onDelete={deleteTask} />
+    <TodoContext.Provider
+      value={{
+        inputValue,
+        todos,
+        doneTasks,
+        handleInputChange,
+        handleSubmit,
+        completeTask,
+        deleteTask,
+      }}
+    >
+      <div className="todo-container">
+        <h1 className="todo-container__header">DONGI TODO</h1>
+        <InputForm />
+        <div className="render-container">
+          <TodoList />
+          <DoneList />
+        </div>
       </div>
-    </div>
+    </TodoContext.Provider>
   );
 }
 
