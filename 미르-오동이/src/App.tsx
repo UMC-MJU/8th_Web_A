@@ -1,12 +1,13 @@
 import './App.css'
+import MoviePage from './pages/MoviePage';
 
-function App() {
-
+function App() : Element {
+ // console.log('토큰',import.meta.env.VITE_TMDB_KEY);
   return (
     <>
-     <h1>Hello React</h1>
+      <MoviePage />
     </>
-  )
+  );
 }
 
 export default App
